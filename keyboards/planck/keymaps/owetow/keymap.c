@@ -146,27 +146,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* MOUSE
      * ,-----------------------------------------------------------------------.
-     * |     |     |CtrL |CtrU |CtrR | B5  |CtrU | ScU |Up   | ScD |     |     |
+     * |     |     | ScU |Up   | ScD | B5  | Ac0 | ScU |Up   | ScD |     |     |
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-     * |     |     | Ac0 | Ac1 | Ac2 | B4  |CtrL |Left |Down |Right|CtrR |     |
+     * |     |     |Left |Down |Right| B4  | Ac1 |Left |Down |Right|     |     |
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-     * |     |     |     |Home | End | B3  |CtrD | ScL | ScR |TabL |TabR |     |
+     * |     |     | ScL |     | ScR | B3  | Ac2 | ScL |     | ScR |     |     |
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
      * |     |     |     |     |     | B2  | B1  |     |     |     |     |     |
      * `-----------------------------------------------------------------------'
      */
     [_MOUSE] = LAYOUT_planck_grid(
-        _______,      XXXXXXX,      C(KC_LEFT),   C(KC_UP),
-        C(KC_RIGHT),  KC_BTN5,      C(KC_UP),     KC_WH_U,
+        _______,      XXXXXXX,      KC_WH_U,      KC_MS_U,
+        KC_WH_D,      KC_BTN5,      KC_ACL0,      KC_WH_U,
         KC_MS_U,      KC_WH_D,      XXXXXXX,      XXXXXXX,
 
-        _______,      XXXXXXX,      KC_ACL0,      KC_ACL1,
-        KC_ACL2,      KC_BTN4,      C(KC_LEFT),   KC_MS_L,
-        KC_MS_D,      KC_MS_R,      C(KC_RIGHT),  XXXXXXX,
+        _______,      XXXXXXX,      KC_MS_L,      KC_MS_D,
+        KC_MS_R,      KC_BTN4,      KC_ACL1,      KC_MS_L,
+        KC_MS_D,      KC_MS_R,      XXXXXXX,      XXXXXXX,
 
-        _______,      XXXXXXX,      XXXXXXX,      KC_HOME,
-        KC_END,       KC_BTN3,      C(KC_DOWN),   KC_WH_L,
-        KC_WH_R,      SC(KC_TAB),   C(KC_TAB),    _______,
+        _______,      XXXXXXX,      KC_WH_L,      XXXXXXX,
+        KC_WH_R,      KC_BTN3,      KC_ACL2,      KC_WH_L,
+        XXXXXXX,      KC_WH_R,      XXXXXXX,      _______,
 
         _______,      _______,      _______,      _______,
         _______,      KC_BTN2,      KC_BTN1,      _______,
