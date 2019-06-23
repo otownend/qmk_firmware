@@ -36,7 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
      * |Shift|  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |  /  |Shift|
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-     * |Ctrl |Super|Func | Alt |Symb |Enter|Space|Move | Alt |Super|Func |Ctrl |
+     * |Ctrl |Func |Super| Alt |Symb |Enter|Space|Move | Alt |Super|Func |Ctrl |
      * `-----------------------------------------------------------------------'
      */
     [_QWERTY] = LAYOUT_planck_grid(
@@ -52,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_V,         KC_B,         KC_N,         KC_M,
         KC_COMM,      KC_DOT,       KC_SLSH,      KC_RSFT,
 
-        KC_LCTL,      KC_LGUI,      FUNC,         KC_LALT,
+        KC_LCTL,      FUNC,         KC_LGUI,      KC_LALT,
         SYMB,         KC_ENT,       KC_SPC,       MOVE,
         KC_RALT,      KC_RGUI,      FUNC,         KC_RCTL
     ),
