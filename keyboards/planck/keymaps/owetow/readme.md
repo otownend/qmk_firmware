@@ -15,7 +15,7 @@ To build for Planck Rev 6:
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
     |Shift|  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |  /  |Shift|
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-    |Ctrl |Super|Func | Alt |Symb |Enter|Space|Move | Alt |Super|Func |Ctrl |
+    |Ctrl |Func |Super| Alt |Symb |Enter|Space|Move | Alt |Super|Func |Ctrl |
     `-----------------------------------------------------------------------'
     
     SYMB
