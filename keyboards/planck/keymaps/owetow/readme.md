@@ -31,11 +31,11 @@ To build for Planck Rev 6:
     
     MOVE
     ,-----------------------------------------------------------------------.
-    |Mouse|CtrUp|PgUp | Up  |PgDn |Caps |CtrUp|PgUp | Up  |PgDn |Caps |Mouse|
+    |Mouse|     |PgUp | Up  |PgDn |Caps |     |PgUp | Up  |PgDn |Caps |Mouse|
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-    |     |CtrL |Left |Down |Right|CtrR |CtrL |Left |Down |Right|CtrR |     |
+    |     |     |Left |Down |Right|     |     |Left |Down |Right|     |     |
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-    |     |CtrDn|Home | End |TabL |TabR |CtrDn|Home | End |TabL |TabR |     |
+    |     |     |Home | End |     |     |     |Home | End |     |     |     |
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
     |     |     |     |     |     |     |     |     |     |     |     |     |
     `-----------------------------------------------------------------------'
