@@ -88,27 +88,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* MOVE
      * ,-----------------------------------------------------------------------.
-     * |Mouse|CtrUp|PgUp | Up  |PgDn |Caps |CtrUp|PgUp | Up  |PgDn |Caps |Mouse|
+     * |Mouse|     |PgUp | Up  |PgDn |Caps |     |PgUp | Up  |PgDn |Caps |Mouse|
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-     * |     |CtrL |Left |Down |Right|CtrR |CtrL |Left |Down |Right|CtrR |     |
+     * |     |     |Left |Down |Right|     |     |Left |Down |Right|     |     |
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-     * |     |CtrDn|Home | End |TabL |TabR |CtrDn|Home | End |TabL |TabR |     |
+     * |     |     |Home | End |     |     |     |Home | End |     |     |     |
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
      * |     |     |     |     |     |     |     |     |     |     |     |     |
      * `-----------------------------------------------------------------------'
      */
     [_MOVE] = LAYOUT_planck_grid(
-        MOUSE,        C(KC_UP),     KC_PGUP,      KC_UP,
-        KC_PGDN,      KC_CAPS,      C(KC_UP),     KC_PGUP,
+        MOUSE,        XXXXXXX,      KC_PGUP,      KC_UP,
+        KC_PGDN,      KC_CAPS,      XXXXXXX,      KC_PGUP,
         KC_UP,        KC_PGDN,      KC_CAPS,      MOUSE,
 
-        _______,      C(KC_LEFT),   KC_LEFT,      KC_DOWN,
-        KC_RGHT,      C(KC_RIGHT),  C(KC_LEFT),   KC_LEFT,
-        KC_DOWN,      KC_RGHT,      C(KC_RIGHT),  XXXXXXX,
+        _______,      XXXXXXX,      KC_LEFT,      KC_DOWN,
+        KC_RGHT,      XXXXXXX,      XXXXXXX,      KC_LEFT,
+        KC_DOWN,      KC_RGHT,      XXXXXXX,      XXXXXXX,
 
-        _______,      C(KC_DOWN),   KC_HOME,      KC_END,
-        SC(KC_TAB),   C(KC_TAB),    C(KC_DOWN),   KC_HOME,
-        KC_END,       SC(KC_TAB),   C(KC_TAB),    _______,
+        _______,      XXXXXXX,      KC_HOME,      KC_END,
+        XXXXXXX,      XXXXXXX,      XXXXXXX,      KC_HOME,
+        KC_END,       XXXXXXX,      XXXXXXX,      _______,
 
         _______,      _______,      _______,      _______,
         _______,      _______,      _______,      _______,
