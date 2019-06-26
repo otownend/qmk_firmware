@@ -88,9 +88,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* MOVE
      * ,-----------------------------------------------------------------------.
-     * |Mouse|     |PgUp | Up  |PgDn |Caps |     |PgUp | Up  |PgDn |Caps |Mouse|
+     * |Mouse|AC(L)|PgUp | Up  |PgDn |Caps |AC(L)|PgUp | Up  |PgDn |Caps |Mouse|
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-     * |     |     |Left |Down |Right|     |     |Left |Down |Right|     |     |
+     * |     |AC(R)|Left |Down |Right|     |AC(R)|Left |Down |Right|     |     |
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
      * |     |     |Home | End |     |     |     |Home | End |     |     |     |
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
@@ -98,12 +98,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------------------'
      */
     [_MOVE] = LAYOUT_planck_grid(
-        MOUSE,        XXXXXXX,      KC_PGUP,      KC_UP,
-        KC_PGDN,      KC_CAPS,      XXXXXXX,      KC_PGUP,
+        MOUSE,        AC(KC_LEFT),  KC_PGUP,      KC_UP,
+        KC_PGDN,      KC_CAPS,      AC(KC_LEFT),  KC_PGUP,
         KC_UP,        KC_PGDN,      KC_CAPS,      MOUSE,
 
-        _______,      XXXXXXX,      KC_LEFT,      KC_DOWN,
-        KC_RGHT,      XXXXXXX,      XXXXXXX,      KC_LEFT,
+        _______,      AC(KC_RGHT),  KC_LEFT,      KC_DOWN,
+        KC_RGHT,      XXXXXXX,      AC(KC_RGHT),  KC_LEFT,
         KC_DOWN,      KC_RGHT,      XXXXXXX,      XXXXXXX,
 
         _______,      XXXXXXX,      KC_HOME,      KC_END,
