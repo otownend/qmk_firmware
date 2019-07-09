@@ -26,6 +26,27 @@ enum planck_keycodes {
     MOUSE,
 };
 
+// tapdance keycodes
+enum td_keycodes {
+    MOVE_MOUSE // MOVE layer while held, `MOUSE` layer on when tapped
+};
+
+// tapdance states
+typedef enum {
+    SINGLE_TAP,
+    SINGLE_HOLD
+} td_state_t;
+
+// the last tapdance state
+static td_state_t td_state;
+
+// function to determine the current tapdance state
+int cur_dance (qk_tap_dance_state_t *state);
+
+// `finished` and `reset` functions for each tapdance keycode
+void td_move_mouse_finished (qk_tap_dance_state_t *state, void *user_data);
+void td_move_mouse_reset (qk_tap_dance_state_t *state, void *user_data);
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* QWERTY
@@ -44,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_R,         KC_T,         KC_Y,         KC_U,
         KC_I,         KC_O,         KC_P,         KC_BSPC,
 
-        MOVE,         KC_A,         KC_S,         KC_D,
+        TD(MOVE_MOUSE),KC_A,         KC_S,         KC_D,
         KC_F,         KC_G,         KC_H,         KC_J,
         KC_K,         KC_L,         KC_SCLN,      KC_QUOT,
 
@@ -53,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_COMM,      KC_DOT,       KC_SLSH,      KC_RSFT,
 
         KC_LCTL,      FUNC,         KC_LGUI,      KC_LALT,
-        SYMB,         KC_ENT,       KC_SPC,       MOVE,
+        SYMB,         KC_ENT,       KC_SPC,       TD(MOVE_MOUSE),
         KC_RALT,      KC_RGUI,      FUNC,         KC_RCTL
     ),
 
@@ -88,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* MOVE
      * ,-----------------------------------------------------------------------.
-     * |Mouse|AC(L)|PgUp | Up  |PgDn |Caps |AC(L)|PgUp | Up  |PgDn |Caps |Mouse|
+     * |     |AC(L)|PgUp | Up  |PgDn |Caps |AC(L)|PgUp | Up  |PgDn |Caps | Del |
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
      * |     |AC(R)|Left |Down |Right|     |AC(R)|Left |Down |Right|     |     |
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
@@ -98,9 +119,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------------------'
      */
     [_MOVE] = LAYOUT_planck_grid(
-        MOUSE,        AC(KC_LEFT),  KC_PGUP,      KC_UP,
+        _______,      AC(KC_LEFT),  KC_PGUP,      KC_UP,
         KC_PGDN,      KC_CAPS,      AC(KC_LEFT),  KC_PGUP,
-        KC_UP,        KC_PGDN,      KC_CAPS,      MOUSE,
+        KC_UP,        KC_PGDN,      KC_CAPS,      KC_DEL,
 
         _______,      AC(KC_RGHT),  KC_LEFT,      KC_DOWN,
         KC_RGHT,      XXXXXXX,      AC(KC_RGHT),  KC_LEFT,
@@ -271,3 +292,39 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
+
+int cur_dance (qk_tap_dance_state_t *state) {
+    if (state->count == 1) {
+        if (!state->pressed) return SINGLE_TAP;
+        else return SINGLE_HOLD;
+    }
+    else { return 8; } // any number higher than the maximum state value you return above
+}
+
+void td_move_mouse_finished (qk_tap_dance_state_t *state, void *user_data) {
+    td_state = cur_dance(state);
+    switch (td_state) {
+        case SINGLE_TAP:
+            layer_on(_MOUSE);
+            break;
+        case SINGLE_HOLD:
+            layer_off(_MOUSE);
+            layer_on(_MOVE);
+            break;
+    }
+}
+
+void td_move_mouse_reset (qk_tap_dance_state_t *state, void *user_data) {
+    switch (td_state) {
+        case SINGLE_TAP:
+            break;
+        case SINGLE_HOLD:
+            layer_off(_MOUSE);
+            layer_off(_MOVE);
+            break;
+    }
+}
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+        [MOVE_MOUSE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_move_mouse_finished, td_move_mouse_reset)
+};
