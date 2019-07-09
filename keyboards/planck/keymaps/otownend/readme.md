@@ -3,7 +3,7 @@
 Based on Callum's planck layout.
 
 To build for Planck Rev 6:  
-`$ make planck/rev6:owetow:dfu-util`
+`$ make planck/rev6:otownend:dfu-util`
 
 ## Layout
 
