@@ -31,7 +31,7 @@ To build for Planck Rev 6:
     
     MOVE
     ,-----------------------------------------------------------------------.
-    |Mouse|AC(L)|PgUp | Up  |PgDn |Caps |AC(L)|PgUp | Up  |PgDn |Caps |Mouse|
+    |     |AC(L)|PgUp | Up  |PgDn |Caps |AC(L)|PgUp | Up  |PgDn |Caps | Del |
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
     |     |AC(R)|Left |Down |Right|     |AC(R)|Left |Down |Right|     |     |
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
