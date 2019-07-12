@@ -32,10 +32,12 @@ enum td_keycodes {
 };
 
 // tapdance states
-typedef enum {
-    SINGLE_TAP,
-    SINGLE_HOLD
-} td_state_t;
+enum td_state_t {
+    SINGLE_TAP = 1,
+    SINGLE_HOLD = 2,
+    DOUBLE_TAP = 3,
+    DOUBLE_HOLD = 4,
+};
 
 // the last tapdance state
 static td_state_t td_state;
@@ -297,6 +299,9 @@ int cur_dance (qk_tap_dance_state_t *state) {
     if (state->count == 1) {
         if (!state->pressed) return SINGLE_TAP;
         else return SINGLE_HOLD;
+    } else if (state->count == 2) {
+        if (!state->pressed) return DOUBLE_TAP;
+        else return DOUBLE_HOLD;
     }
     else { return 8; } // any number higher than the maximum state value you return above
 }
@@ -305,9 +310,13 @@ void td_move_mouse_finished (qk_tap_dance_state_t *state, void *user_data) {
     td_state = cur_dance(state);
     switch (td_state) {
         case SINGLE_TAP:
+            layer_off(_MOUSE);
+            break;
+        case DOUBLE_TAP:
             layer_on(_MOUSE);
             break;
         case SINGLE_HOLD:
+        case DOUBLE_HOLD:
             layer_off(_MOUSE);
             layer_on(_MOVE);
             break;
@@ -317,8 +326,10 @@ void td_move_mouse_finished (qk_tap_dance_state_t *state, void *user_data) {
 void td_move_mouse_reset (qk_tap_dance_state_t *state, void *user_data) {
     switch (td_state) {
         case SINGLE_TAP:
+        case DOUBLE_TAP:
             break;
         case SINGLE_HOLD:
+        case DOUBLE_HOLD:
             layer_off(_MOUSE);
             layer_off(_MOVE);
             break;
