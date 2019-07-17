@@ -5,10 +5,6 @@ extern keymap_config_t keymap_config;
 
 /* CTRL+ALT */
 #define AC(X) A(C(X))
-/* CTRL+SHIFT */
-#define SC(X) S(C(X))
-/* WIN+SHIFT */
-#define SG(X) S(G(X))
 
 enum planck_layers {
     _QWERTY,
