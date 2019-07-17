@@ -28,12 +28,12 @@ enum td_keycodes {
 };
 
 // tapdance states
-enum td_state_t {
+typedef enum {
     SINGLE_TAP = 1,
     SINGLE_HOLD = 2,
     DOUBLE_TAP = 3,
     DOUBLE_HOLD = 4,
-};
+} td_state_t;
 
 // the last tapdance state
 static td_state_t td_state;
