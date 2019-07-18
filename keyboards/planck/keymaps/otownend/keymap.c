@@ -140,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
      * | ___ | F11 | F12 | F13 | F14 | F15 | F16 | F17 | F18 | F19 | F20 |VolDn|
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-     * | ___ | XXX | XXX |Pscr | Ins | XXX | XXX | XXX | XXX | XXX | XXX | ___ |
+     * | ___ |Pscr | Ins | XXX | XXX | XXX | XXX | XXX | XXX | XXX | XXX | ___ |
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
      * | ___ | ___ | ___ | ___ |Prev |Mute |Play |Next | XXX | XXX | XXX | ___ |
      * `-----------------------------------------------------------------------'
@@ -154,8 +154,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_F14,       KC_F15,       KC_F16,       KC_F17,
         KC_F18,       KC_F19,       KC_F20,       KC_VOLD,
 
-        _______,      XXXXXXX,      XXXXXXX,      KC_PSCR,
-        KC_INS,       XXXXXXX,      XXXXXXX,      XXXXXXX,
+        _______,      KC_PSCR,      KC_INS,       XXXXXXX,
+        XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
         XXXXXXX,      XXXXXXX,      XXXXXXX,      _______,
 
         _______,      _______,      _______,      _______,
