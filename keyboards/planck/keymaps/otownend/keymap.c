@@ -3,9 +3,6 @@
 
 extern keymap_config_t keymap_config;
 
-/* CTRL+ALT */
-#define AC(X) A(C(X))
-
 enum planck_layers {
     _QWERTY,
     _SYMB,
@@ -22,9 +19,8 @@ enum planck_keycodes {
     MOUSE,
 };
 
-// tapdance keycodes
 enum td_keycodes {
-    MOVE_MOUSE // MOVE layer while held, `MOUSE` layer on when tapped
+    TD_MV_MS // MOVE layer while held, `MOUSE` layer on when double tapped
 };
 
 // tapdance states
@@ -45,6 +41,9 @@ int cur_dance (qk_tap_dance_state_t *state);
 void td_move_mouse_finished (qk_tap_dance_state_t *state, void *user_data);
 void td_move_mouse_reset (qk_tap_dance_state_t *state, void *user_data);
 
+/* CTRL+ALT */
+#define AC(X) A(C(X))
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* QWERTY
@@ -59,21 +58,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------------------'
      */
     [_QWERTY] = LAYOUT_planck_grid(
-        KC_TAB,       KC_Q,         KC_W,         KC_E,
-        KC_R,         KC_T,         KC_Y,         KC_U,
-        KC_I,         KC_O,         KC_P,         KC_BSPC,
-
-        TD(MOVE_MOUSE),KC_A,         KC_S,         KC_D,
-        KC_F,         KC_G,         KC_H,         KC_J,
-        KC_K,         KC_L,         KC_SCLN,      KC_QUOT,
-
-        KC_LSFT,      KC_Z,         KC_X,         KC_C,
-        KC_V,         KC_B,         KC_N,         KC_M,
-        KC_COMM,      KC_DOT,       KC_SLSH,      KC_ENT,
-
-        KC_LCTL,      FUNC,         KC_LGUI,      KC_LALT,
-        SYMB,         KC_SPC,       KC_SPC,       TD(MOVE_MOUSE),
-        KC_LBRC,      KC_RBRC,      KC_BSLS,      KC_RCTL
+        KC_TAB,       KC_Q, KC_W,    KC_E,    KC_R, KC_T,   KC_Y,   KC_U,         KC_I,    KC_O,    KC_P,    KC_BSPC,
+        TD(TD_MV_MS), KC_A, KC_S,    KC_D,    KC_F, KC_G,   KC_H,   KC_J,         KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+        KC_LSFT,      KC_Z, KC_X,    KC_C,    KC_V, KC_B,   KC_N,   KC_M,         KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
+        KC_LCTL,      FUNC, KC_LGUI, KC_LALT, SYMB, KC_SPC, KC_SPC, TD(TD_MV_MS), KC_LBRC, KC_RBRC, KC_BSLS, KC_RCTL
     ),
 
     /* SYMB
@@ -88,21 +76,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------------------'
      */
     [_SYMB] = LAYOUT_planck_grid(
-        KC_ESC,       KC_1,         KC_2,         KC_3,
-        KC_4,         KC_5,         KC_6,         KC_7,
-        KC_8,         KC_9,         KC_0,         KC_DEL,
-
-        _______,      KC_EXLM,      KC_AT,        KC_HASH,
-        KC_DLR,       KC_PERC,      KC_CIRC,      KC_AMPR,
-        KC_ASTR,      XXXXXXX,      _______,      _______,
-
-        _______,      KC_TILD,      KC_GRV,       KC_PLUS,
-        KC_EQL,       KC_UNDS,      KC_MINS,      XXXXXXX,
-        _______,      _______,      _______,      _______,
-
-        _______,      _______,      _______,      _______,
-        _______,      _______,      _______,      _______,
-        KC_LPRN,      KC_RPRN,      _______,      _______
+        KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
+        _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, XXXXXXX, _______, _______,
+        _______, KC_TILD, KC_GRV,  KC_PLUS, KC_EQL,  KC_UNDS, KC_MINS, XXXXXXX, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, KC_LPRN, KC_RPRN, _______, _______
     ),
 
     /* MOVE
@@ -117,21 +94,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------------------'
      */
     [_MOVE] = LAYOUT_planck_grid(
-        _______,      AC(KC_LEFT),  KC_PGUP,      KC_UP,
-        KC_PGDN,      KC_CAPS,      AC(KC_LEFT),  KC_PGUP,
-        KC_UP,        KC_PGDN,      KC_CAPS,      KC_DEL,
-
-        _______,      AC(KC_RGHT),  KC_LEFT,      KC_DOWN,
-        KC_RGHT,      XXXXXXX,      AC(KC_RGHT),  KC_LEFT,
-        KC_DOWN,      KC_RGHT,      XXXXXXX,      XXXXXXX,
-
-        _______,      XXXXXXX,      KC_HOME,      KC_END,
-        XXXXXXX,      XXXXXXX,      XXXXXXX,      KC_HOME,
-        KC_END,       XXXXXXX,      XXXXXXX,      _______,
-
-        _______,      _______,      _______,      _______,
-        _______,      _______,      _______,      _______,
-        XXXXXXX,      XXXXXXX,      XXXXXXX,      _______
+        _______, AC(KC_LEFT), KC_PGUP, KC_UP,   KC_PGDN, KC_CAPS, AC(KC_LEFT), KC_PGUP, KC_UP,   KC_PGDN, KC_CAPS, KC_DEL,
+        _______, AC(KC_RGHT), KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, AC(KC_RGHT), KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX,     KC_HOME, KC_END,  XXXXXXX, XXXXXXX, XXXXXXX,     KC_HOME, KC_END,  XXXXXXX, XXXXXXX, _______,
+        _______, _______,     _______, _______, _______, _______, _______,     _______, XXXXXXX, XXXXXXX, XXXXXXX, _______
     ),
 
     /* FUNC
@@ -146,21 +112,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------------------'
      */
     [_FUNC] = LAYOUT_planck_grid(
-        RESET,        KC_F1,        KC_F2,        KC_F3,
-        KC_F4,        KC_F5,        KC_F6,        KC_F7,
-        KC_F8,        KC_F9,        KC_F10,       KC_DEL,
-
-        _______,      KC_F11,       KC_F12,       KC_F13,
-        KC_F14,       KC_F15,       KC_F16,       KC_F17,
-        KC_F18,       KC_F19,       KC_F20,       XXXXXXX,
-
-        _______,      KC_PSCR,      KC_INS,       XXXXXXX,
-        XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,
-        XXXXXXX,      XXXXXXX,      XXXXXXX,      _______,
-
-        _______,      _______,      _______,      _______,
-        KC_MPRV,      KC_MPLY,      KC_MPLY,      KC_MNXT,
-        KC_VOLD,      KC_VOLU,      KC_MUTE,      _______
+        RESET,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_DEL,
+        _______, KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15,  KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  XXXXXXX,
+        _______, KC_PSCR, KC_INS,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+        _______, _______, _______, _______, KC_MPRV, KC_MPLY, KC_MPLY, KC_MNXT, KC_VOLD, KC_VOLU, KC_MUTE, _______
     ),
 
     /* MOUSE
@@ -175,21 +130,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------------------'
      */
     [_MOUSE] = LAYOUT_planck_grid(
-        _______,      XXXXXXX,      KC_WH_U,      KC_MS_U,
-        KC_WH_D,      KC_BTN4,      KC_ACL0,      KC_WH_U,
-        KC_MS_U,      KC_WH_D,      XXXXXXX,      _______,
-
-        _______,      XXXXXXX,      KC_MS_L,      KC_MS_D,
-        KC_MS_R,      KC_BTN3,      KC_ACL1,      KC_MS_L,
-        KC_MS_D,      KC_MS_R,      XXXXXXX,      XXXXXXX,
-
-        _______,      XXXXXXX,      KC_WH_L,      XXXXXXX,
-        KC_WH_R,      KC_BTN2,      KC_ACL2,      KC_WH_L,
-        XXXXXXX,      KC_WH_R,      XXXXXXX,      _______,
-
-        _______,      _______,      _______,      _______,
-        _______,      KC_BTN1,      KC_BTN1,      _______,
-        XXXXXXX,      XXXXXXX,      XXXXXXX,      _______
+        _______, XXXXXXX, KC_WH_U, KC_MS_U, KC_WH_D, KC_BTN4, KC_ACL0, KC_WH_U, KC_MS_U, KC_WH_D, XXXXXXX, _______,
+        _______, XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, KC_BTN3, KC_ACL1, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX, KC_WH_L, XXXXXXX, KC_WH_R, KC_BTN2, KC_ACL2, KC_WH_L, XXXXXXX, KC_WH_R, XXXXXXX, _______,
+        _______, _______, _______, _______, _______, KC_BTN1, KC_BTN1, _______, XXXXXXX, XXXXXXX, XXXXXXX, _______
     )
 };
 
@@ -333,5 +277,5 @@ void td_move_mouse_reset (qk_tap_dance_state_t *state, void *user_data) {
 }
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-        [MOVE_MOUSE] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_move_mouse_finished, td_move_mouse_reset)
+        [TD_MV_MS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_move_mouse_finished, td_move_mouse_reset)
 };
