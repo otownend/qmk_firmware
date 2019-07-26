@@ -5,6 +5,7 @@ extern keymap_config_t keymap_config;
 
 enum planck_layers {
     _QWERTY,
+    _NUMPAD,
     _SYMB,
     _MOVE,
     _FUNC,
@@ -13,6 +14,7 @@ enum planck_layers {
 
 enum planck_keycodes {
     QWERTY = SAFE_RANGE,
+    NUMPAD,
     SYMB,
     MOVE,
     FUNC,
@@ -20,7 +22,8 @@ enum planck_keycodes {
 };
 
 enum td_keycodes {
-    TD_MV_MS // MOVE layer while held, `MOUSE` layer on when double tapped
+    TD_MV_MS, // MOVE layer while held, MOUSE layer on when double tapped
+    TD_FN_NP, // FUNC layer while held, NUMPAD layer on when double tapped
 };
 
 // tapdance states
@@ -40,6 +43,8 @@ int cur_dance (qk_tap_dance_state_t *state);
 // `finished` and `reset` functions for each tapdance keycode
 void td_move_mouse_finished (qk_tap_dance_state_t *state, void *user_data);
 void td_move_mouse_reset (qk_tap_dance_state_t *state, void *user_data);
+void td_func_numpad_finished (qk_tap_dance_state_t *state, void *user_data);
+void td_func_numpad_reset (qk_tap_dance_state_t *state, void *user_data);
 
 /* CTRL+ALT */
 #define AC(X) A(C(X))
@@ -58,10 +63,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * `-----------------------------------------------------------------------'
      */
     [_QWERTY] = LAYOUT_planck_grid(
-        KC_TAB,       KC_Q, KC_W,    KC_E,    KC_R, KC_T,   KC_Y,   KC_U,         KC_I,    KC_O,    KC_P,    KC_BSPC,
-        TD(TD_MV_MS), KC_A, KC_S,    KC_D,    KC_F, KC_G,   KC_H,   KC_J,         KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-        KC_LSFT,      KC_Z, KC_X,    KC_C,    KC_V, KC_B,   KC_N,   KC_M,         KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
-        KC_LCTL,      FUNC, KC_LGUI, KC_LALT, SYMB, KC_SPC, KC_SPC, TD(TD_MV_MS), KC_LBRC, KC_RBRC, KC_BSLS, KC_RCTL
+        KC_TAB,       KC_Q,         KC_W,    KC_E,    KC_R, KC_T,   KC_Y,   KC_U,         KC_I,    KC_O,    KC_P,    KC_BSPC,
+        TD(TD_MV_MS), KC_A,         KC_S,    KC_D,    KC_F, KC_G,   KC_H,   KC_J,         KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+        KC_LSFT,      KC_Z,         KC_X,    KC_C,    KC_V, KC_B,   KC_N,   KC_M,         KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
+        KC_LCTL,      TD(TD_FN_NP), KC_LGUI, KC_LALT, SYMB, KC_SPC, KC_SPC, TD(TD_MV_MS), KC_LBRC, KC_RBRC, KC_BSLS, KC_RCTL
+    ),
+
+    /* NUMPAD
+     * ,-----------------------------------------------------------------------.
+     * | Tab | XXX | XXX | XXX | XXX | XXX |Calc |NLock|  7  |  8  |  9  |Bksp |
+     * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
+     * | ___ | XXX | XXX | XXX | XXX | XXX |  /  |  *  |  4  |  5  |  6  | Esc |
+     * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
+     * | ___ | XXX | XXX | XXX | XXX | XXX |  -  |  +  |  1  |  2  |  3  |Enter|
+     * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
+     * | ___ | ___ | ___ | ___ | ___ |    ___    | ___ |  =  |  0  |  .  | ___ |
+     * `-----------------------------------------------------------------------'
+     */
+    [_NUMPAD] = LAYOUT_planck_grid(
+            KC_TAB,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CALC,     KC_NUMLOCK,     KC_KP_7, KC_KP_8, KC_KP_9,   KC_BSPC,
+            _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_KP_SLASH, KC_KP_ASTERISK, KC_KP_4, KC_KP_5, KC_KP_6,   KC_ESC,
+            _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_KP_MINUS, KC_KP_PLUS,     KC_KP_1, KC_KP_2, KC_KP_3,   KC_KP_ENTER,
+            _______, _______, _______, _______, _______, _______, _______,     _______,        KC_EQL,  KC_KP_0, KC_KP_DOT, _______
     ),
 
     /* SYMB
@@ -276,6 +299,37 @@ void td_move_mouse_reset (qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
+void td_func_numpad_finished (qk_tap_dance_state_t *state, void *user_data) {
+    td_state = cur_dance(state);
+    switch (td_state) {
+        case SINGLE_TAP:
+            layer_off(_NUMPAD);
+            break;
+        case DOUBLE_TAP:
+            layer_on(_NUMPAD);
+            break;
+        case SINGLE_HOLD:
+        case DOUBLE_HOLD:
+            layer_off(_NUMPAD);
+            layer_on(_FUNC);
+            break;
+    }
+}
+
+void td_func_numpad_reset (qk_tap_dance_state_t *state, void *user_data) {
+    switch (td_state) {
+        case SINGLE_TAP:
+        case DOUBLE_TAP:
+            break;
+        case SINGLE_HOLD:
+        case DOUBLE_HOLD:
+            layer_off(_NUMPAD);
+            layer_off(_FUNC);
+            break;
+    }
+}
+
 qk_tap_dance_action_t tap_dance_actions[] = {
-        [TD_MV_MS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_move_mouse_finished, td_move_mouse_reset)
+        [TD_MV_MS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_move_mouse_finished, td_move_mouse_reset),
+        [TD_FN_NP] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_func_numpad_finished, td_func_numpad_reset),
 };
