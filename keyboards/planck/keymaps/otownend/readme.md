@@ -17,7 +17,7 @@ To build for Planck Rev 6:
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
     |Shift|  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |  /  |Enter|
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-    |Ctrl |Func |Super| Alt |Symb |   Space   |Move |  [  |  ]  |  \  |Ctrl |
+    |Ctrl |Func | Alt |Super|Symb |   Space   |Move |  [  |  ]  |  \  |Ctrl |
     `-----------------------------------------------------------------------'
     
     NUMPAD
@@ -44,9 +44,9 @@ To build for Planck Rev 6:
     
     MOVE
     ,-----------------------------------------------------------------------.
-    | ___ |AC(L)|PgUp | Up  |PgDn |Caps |AC(L)|PgUp | Up  |PgDn |Caps | Del |
+    | ___ | #([)|PgUp | Up  |PgDn |Caps |AC(L)|PgUp | Up  |PgDn |Caps | Del |
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-    | ___ |AC(R)|Left |Down |Right| XXX |AC(R)|Left |Down |Right| XXX | XXX |
+    | ___ | #(])|Left |Down |Right| XXX |AC(R)|Left |Down |Right| XXX | XXX |
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
     | ___ | XXX |Home | End | XXX | XXX | XXX |Home | End | XXX | XXX | ___ |
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
