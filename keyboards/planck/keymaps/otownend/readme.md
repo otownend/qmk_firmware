@@ -44,9 +44,9 @@ To build for Planck Rev 6:
     
     MOVE
     ,-----------------------------------------------------------------------.
-    | ___ | #([)|PgUp | Up  |PgDn |Caps |AC(L)|PgUp | Up  |PgDn |Caps | Del |
+    | ___ | #([)|PgUp | Up  |PgDn |Caps | #([)|PgUp | Up  |PgDn |Caps | Del |
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-    | ___ | #(])|Left |Down |Right| XXX |AC(R)|Left |Down |Right| XXX | XXX |
+    | ___ | #(])|Left |Down |Right| XXX | #(])|Left |Down |Right| XXX | XXX |
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
     | ___ | XXX |Home | End | XXX | XXX | XXX |Home | End | XXX | XXX | ___ |
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
