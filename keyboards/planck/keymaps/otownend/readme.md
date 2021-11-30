@@ -5,7 +5,7 @@ Based on Callum's planck layout.
 Tap MOVE key(s) to get to MOUSE layer.
 
 To build for Planck Rev 6:  
-`$ make planck/rev6:otownend:dfu-util`
+`$ qmk compile --clean --keyboard planck/rev6 --keymap otownend`
 
 ## Layout
 
@@ -44,11 +44,11 @@ To build for Planck Rev 6:
     
     MOVE
     ,-----------------------------------------------------------------------.
-    | ___ | #([)|PgUp | Up  |PgDn |Caps | #([)|PgUp | Up  |PgDn |Caps | Del |
+    | ___ | #([)|PgUp | Up  |PgDn |Caps | ___ | ___ | ___ | ___ |Caps | Del |
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-    | ___ | #(])|Left |Down |Right| XXX | #(])|Left |Down |Right| XXX | XXX |
+    | ___ | #(])|Left |Down |Right| XXX |Left |Down | Up  |Right| XXX | XXX |
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-    | ___ | XXX |Home | End | XXX | XXX | XXX |Home | End | XXX | XXX | ___ |
+    | ___ | XXX |Home | End | XXX | XXX |Home |PgDn |PgUp | End | XXX | ___ |
     |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
     | ___ | ___ | ___ | ___ | ___ |    ___    | ___ | XXX | XXX | XXX | ___ |
     `-----------------------------------------------------------------------'

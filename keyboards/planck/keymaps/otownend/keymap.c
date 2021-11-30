@@ -104,20 +104,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* MOVE
      * ,-----------------------------------------------------------------------.
-     * | ___ | #([)|PgUp | Up  |PgDn |Caps | #([)|PgUp | Up  |PgDn |Caps | Del |
+     * | ___ | #([)|PgUp | Up  |PgDn |Caps | ___ | ___ | ___ | ___ |Caps | Del |
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-     * | ___ | #(])|Left |Down |Right| XXX | #(])|Left |Down |Right| XXX | XXX |
+     * | ___ | #(])|Left |Down |Right| XXX |Left |Down | Up  |Right| XXX | XXX |
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
-     * | ___ | XXX |Home | End | XXX | XXX | XXX |Home | End | XXX | XXX | ___ |
+     * | ___ | XXX |Home | End | XXX | XXX |Home |PgDn |PgUp | End | XXX | ___ |
      * |-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----|
      * | ___ | ___ | ___ | ___ | ___ |    ___    | ___ | XXX | XXX | XXX | ___ |
      * `-----------------------------------------------------------------------'
      */
     [_MOVE] = LAYOUT_planck_grid(
-        _______, LGUI(KC_LBRC), KC_PGUP, KC_UP,   KC_PGDN, KC_CAPS, LGUI(KC_LBRC), KC_PGUP, KC_UP,   KC_PGDN, KC_CAPS, KC_DEL,
-        _______, LGUI(KC_RBRC), KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, LGUI(KC_RBRC), KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
-        _______, XXXXXXX,       KC_HOME, KC_END,  XXXXXXX, XXXXXXX, XXXXXXX,       KC_HOME, KC_END,  XXXXXXX, XXXXXXX, _______,
-        _______, _______,       _______, _______, _______, _______, _______,       _______, XXXXXXX, XXXXXXX, XXXXXXX, _______
+        _______, LGUI(KC_LBRC), KC_PGUP, KC_UP,   KC_PGDN, KC_CAPS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_CAPS, KC_DEL,
+        _______, LGUI(KC_RBRC), KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX,       KC_HOME, KC_END,  XXXXXXX, XXXXXXX, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  XXXXXXX, _______,
+        _______, _______,       _______, _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, _______
     ),
 
     /* FUNC
