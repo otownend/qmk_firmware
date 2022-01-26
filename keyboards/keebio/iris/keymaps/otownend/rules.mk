@@ -1,19 +1,19 @@
-BOOTMAGIC_ENABLE   = no       # Enable Bootmagic Lite
-MOUSEKEY_ENABLE    = no       # Mouse keys
-EXTRAKEY_ENABLE    = yes      # Audio control and System control
-CONSOLE_ENABLE     = no       # Console for debug
-COMMAND_ENABLE     = no       # Commands for debug and configuration
-TAP_DANCE_ENABLE   = no
-AUDIO_ENABLE       = no
-NKRO_ENABLE        = yes
-BACKLIGHT_ENABLE   = no
-SWAP_HANDS_ENABLE  = no
-BOOTLOADER         = qmk-dfu
+# Bootloader selection
+BOOTLOADER = atmel-dfu
+#BOOTLOADER = qmk-dfu
 
-INDICATOR_LIGHTS            = no
-RGBLIGHT_STARTUP_ANIMATION  = no
-CUSTOM_UNICODE_ENABLE       = no
-CUSTOM_SPLIT_TRANSPORT_SYNC = no
-
-RGBLIGHT_ENABLE    = yes
-BACKLIGHT_ENABLE   = yes
+# Build Options
+#   change yes to no to disable
+#
+#BOOTMAGIC_ENABLE = no       # Enable Bootmagic Lite
+#MOUSEKEY_ENABLE = no        # Mouse keys
+#EXTRAKEY_ENABLE = yes       # Audio control and System control
+CONSOLE_ENABLE = no         # Console for debug
+#COMMAND_ENABLE = no         # Commands for debug and configuration
+NKRO_ENABLE = yes           # Enable N-Key Rollover
+#BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
+#RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
+#AUDIO_ENABLE = no           # Audio output
+#SPLIT_KEYBOARD = yes
+#ENCODER_ENABLE = yes
+#RGB_MATRIX_ENABLE = yes
