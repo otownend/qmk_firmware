@@ -15,8 +15,11 @@ enum custom_keycodes {
   ADJUST,
 };
 
-#define WEB_L       LGUI(KC_LCBR)       // Back
-#define WEB_R       LGUI(KC_RCBR)       // Forward
+// Nav works on Chrome, Firefox, Slack
+#define WEB_BK      LGUI(KC_LBRC)       // Back
+#define WEB_FW      LGUI(KC_RBRC)       // Forward
+#define WEB_L       LGUI(KC_LCBR)       // Tab Left
+#define WEB_R       LGUI(KC_RCBR)       // Tab Right
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -50,11 +53,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_MOVE] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, _______,
+     _______, _______, _______, _______, _______, _______,                            _______, _______, _______, _______, _______, KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, WEB_L,   KC_PGUP, KC_UP,   KC_PGDN, XXXXXXX,                            _______, _______, _______, _______, _______, _______,
+     _______, WEB_BK,  KC_PGUP, KC_UP,   KC_PGDN, XXXXXXX,                            _______, _______, _______, _______, _______, _______,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     _______, WEB_R,   KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX,                            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX,
+     _______, WEB_FW,  KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX,                            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______, XXXXXXX, KC_HOME, KC_END,  XXXXXXX, XXXXXXX, _______,          _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  XXXXXXX, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
