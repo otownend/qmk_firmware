@@ -4,8 +4,11 @@ Based on Callum's planck layout.
 
 Tap MOVE key(s) to get to MOUSE layer.
 
-To build for Planck Rev 6:  
-`$ qmk compile --clean --keyboard planck/rev6 --keymap otownend`
+To clean and build:  
+`$ qmk --verbose compile --clean --keyboard planck/rev6 --keymap otownend`
+
+To flash:  
+`$ qmk --verbose flash --keyboard planck/rev6 --keymap otownend`
 
 ## Layout
 
