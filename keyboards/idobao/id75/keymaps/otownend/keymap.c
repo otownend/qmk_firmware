@@ -15,9 +15,25 @@
  */
 #include QMK_KEYBOARD_H
 
-// Keyboard Layers
-#define _QW 0
-#define _FN 1
+enum layer_names {
+    _QWERTY,
+    _FUNC,
+    _MOVE,
+    _ADJUST,
+};
+
+enum custom_keycodes {
+    QWERTY = SAFE_RANGE,
+    FUNC,
+    MOVE,
+    ADJUST,
+};
+
+// Nav works on Chrome, Firefox, Slack
+#define WEB_BK      LGUI(KC_LBRC)       // Back
+#define WEB_FW      LGUI(KC_RBRC)       // Forward
+#define WEB_L       LGUI(KC_LCBR)       // Tab Left
+#define WEB_R       LGUI(KC_RCBR)       // Tab Right
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -25,25 +41,55 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * .--------------------------------------------------------------------------------------------------------------------------------------.
  * | ESC    | 1      | 2      | 3      | 4      | 5      | -      | `      | =      | 6      | 7      | 8      | 9      | 0      | BACKSP |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-----------------|
- * | TAB    | Q      | W      | E      | R      | T      | [      | \      | ]      | Y      | U      | I      | O      | P      | '      |
+ * | TAB    | Q      | W      | E      | R      | T      | [      | \      | ]      | Y      | U      | I      | O      | P      | ENTER  |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+-----------------+--------|
- * | CAP LK | A      | S      | D      | F      | G      | HOME   | DEL    | PG UP  | H      | J      | K      | L      | ;      | ENTER  |
+ * | CAP LK | A      | S      | D      | F      | G      | HOME   | INS    | END    | H      | J      | K      | L      | ;      | '      |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------------------------+--------|
- * | LSHIFT | Z      | X      | C      | V      | B      | END    | UP     | PG DN  | N      | M      | ,      | .      | /      | RSHIFT |
+ * | LSHIFT | Z      | X      | C      | V      | B      | PG UP  | UP     | PG DN  | N      | M      | ,      | .      | /      | RSHIFT |
  * |--------+--------+--------+--------+--------+-----------------+--------+--------+--------+--------+-----------------+--------+--------|
- * | LCTRL  | LGUI   | LALT   | FN     | SPACE  | SPACE  | LEFT   | DOWN   | RIGHT  | SPACE  | SPACE  | FN     | RALT   | RGUI   | RCTRL  |
+ * | LCTRL  | FUNC   | XXXXXX | LALT   | LGUI   | SPACE  | LEFT   | DOWN   | RIGHT  | SPACE  | MOVE   | RGUI   | RALT   | XXXXXX | RCTRL  |
  * '--------------------------------------------------------------------------------------------------------------------------------------'
  */
 
- [_QW] = LAYOUT_ortho_5x15( /* QWERTY */
+ [_QWERTY] = LAYOUT_ortho_5x15( /* QWERTY */
     KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_MINS, KC_GRV,  KC_EQL,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC, KC_BSLS, KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_QUOT,
-    KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_HOME, KC_DEL,  KC_PGUP, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_END,  KC_UP,   KC_PGDN, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT, MO(_FN), KC_SPC,  KC_SPC,  KC_LEFT, KC_DOWN, KC_RGHT, KC_SPC,  KC_SPC,  MO(_FN), KC_RALT, KC_RGUI, KC_RCTL
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC, KC_BSLS, KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_ENT,
+    MOVE,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_HOME, KC_INS,  KC_END,  KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_PGUP, KC_UP,   KC_PGDN, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+    KC_LCTL, FUNC,    ADJUST,  KC_LALT, KC_LGUI, KC_SPC,  KC_LEFT, KC_DOWN, KC_RGHT, KC_SPC,  MOVE,    KC_RGUI, KC_RALT, FUNC,    KC_RCTL
  ),
 
 /* FUNCTION
+ * .--------------------------------------------------------------------------------------------------------------------------------------.
+ * |        | F1     | F2     | F3     | F4     | F5     |        |        |        | F6     | F7     | F8     | F9     | F10    |        |
+ * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
+ * |        | F11    | F12    | F13    | F14    | F15    |        |        |        | F16    | F17    | F18    | F19    | F20    |        |
+ * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
+ * |        | !      | @      | #      | $      | %      |        |        |        | ^      | &      | *      | (      | )      |        |
+ * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
+ * |        | ~      | `      | +      | =      | _      |        |        |        | -      |        |        |        |        |        |
+ * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
+ * |        |        |        |        |        |        |        |        |        |        |        |        |        |        |        |
+ * '--------------------------------------------------------------------------------------------------------------------------------------'
+ */
+
+ [_FUNC] = LAYOUT_ortho_5x15( /* FUNCTION */
+    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______, _______, _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_DEL,
+    _______, KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15,  _______, _______, _______, KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  _______,
+    _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______, _______, _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______,
+    _______, KC_TILD, KC_GRV,  KC_PLUS, KC_EQL,  KC_UNDS, _______, _______, _______, KC_MINS, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+ ),
+
+ [_MOVE] = LAYOUT_ortho_5x15( /* Movement Layer */
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,
+    _______, WEB_BK,  KC_PGUP, KC_UP,   KC_PGDN, WEB_L,   _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+    _______, WEB_FW,  KC_LEFT, KC_DOWN, KC_RGHT, WEB_R,   _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX,
+    _______, XXXXXXX, KC_HOME, KC_END,  XXXXXXX, XXXXXXX, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  XXXXXXX, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+ ),
+
+/* ADJUST: The default FUNCTION layer
  * .--------------------------------------------------------------------------------------------------------------------------------------.
  * | F1     | F2     | F3     | F4     | F5     | F6     | NUM LK | P/     | P*     | F7     | F8     | F9     | F10    | F11    | F12    |
  * |--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------+--------|
@@ -57,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * '--------------------------------------------------------------------------------------------------------------------------------------'
  */
  
- [_FN] = LAYOUT_ortho_5x15( /* FUNCTION */
+ [_ADJUST] = LAYOUT_ortho_5x15( /* The default FUNCTION layer */
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_NLCK, KC_SLSH, KC_ASTR, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
     KC_MSEL, KC_CALC, KC_MYCM, KC_MAIL, RGB_HUD, RGB_HUI, KC_P7,   KC_P8,   KC_P9,   KC_MINS, _______, _______, KC_PSCR, KC_SLCK, KC_PAUS,
     KC_MPRV, KC_MPLY, KC_MNXT, KC_MSTP, RGB_SAD, RGB_SAI, KC_P4,   KC_P5,   KC_P6,   KC_PLUS, _______, QK_BOOT,   _______, _______, _______,
@@ -65,3 +111,44 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, RGB_TOG, MO(_FN), RGB_RMOD,RGB_MOD, KC_P0,   _______, KC_PDOT, KC_PENT, KC_PENT, MO(_FN), _______, _______, _______
  ),
 };
+
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case QWERTY:
+      if (record->event.pressed) {
+        set_single_persistent_default_layer(_QWERTY);
+      }
+      return false;
+      break;
+    case MOVE:
+      if (record->event.pressed) {
+        layer_on(_MOVE);
+        update_tri_layer(_MOVE, _FUNC, _ADJUST);
+      } else {
+        layer_off(_MOVE);
+        update_tri_layer(_MOVE, _FUNC, _ADJUST);
+      }
+      return false;
+      break;
+    case FUNC:
+      if (record->event.pressed) {
+        layer_on(_FUNC);
+        update_tri_layer(_MOVE, _FUNC, _ADJUST);
+      } else {
+        layer_off(_FUNC);
+        update_tri_layer(_MOVE, _FUNC, _ADJUST);
+      }
+      return false;
+      break;
+    case ADJUST:
+      if (record->event.pressed) {
+        layer_on(_ADJUST);
+      } else {
+        layer_off(_ADJUST);
+      }
+      return false;
+      break;
+  }
+  return true;
+}
