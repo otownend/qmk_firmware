@@ -1,4 +1,4 @@
-#include "planck.h"
+#include QMK_KEYBOARD_H
 #include "action_layer.h"
 
 extern keymap_config_t keymap_config;
@@ -35,11 +35,11 @@ typedef enum {
 static td_state_t td_state;
 
 // function to determine the current tapdance state
-int cur_dance (qk_tap_dance_state_t *state);
+int cur_dance (tap_dance_state_t *state);
 
 // `finished` and `reset` functions for each tapdance keycode
-void td_move_mouse_finished (qk_tap_dance_state_t *state, void *user_data);
-void td_move_mouse_reset (qk_tap_dance_state_t *state, void *user_data);
+void td_move_mouse_finished (tap_dance_state_t *state, void *user_data);
+void td_move_mouse_reset (tap_dance_state_t *state, void *user_data);
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -182,7 +182,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-int cur_dance (qk_tap_dance_state_t *state) {
+int cur_dance (tap_dance_state_t *state) {
     if (state->count == 1) {
         if (!state->pressed) return SINGLE_TAP;
         else return SINGLE_HOLD;
@@ -193,7 +193,7 @@ int cur_dance (qk_tap_dance_state_t *state) {
     else { return 8; } // any number higher than the maximum state value you return above
 }
 
-void td_move_mouse_finished (qk_tap_dance_state_t *state, void *user_data) {
+void td_move_mouse_finished (tap_dance_state_t *state, void *user_data) {
     td_state = cur_dance(state);
     switch (td_state) {
         case SINGLE_TAP:
@@ -210,7 +210,7 @@ void td_move_mouse_finished (qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void td_move_mouse_reset (qk_tap_dance_state_t *state, void *user_data) {
+void td_move_mouse_reset (tap_dance_state_t *state, void *user_data) {
     switch (td_state) {
         case SINGLE_TAP:
         case DOUBLE_TAP:
@@ -223,6 +223,6 @@ void td_move_mouse_reset (qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
         [TD_MV_MS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_move_mouse_finished, td_move_mouse_reset),
 };
