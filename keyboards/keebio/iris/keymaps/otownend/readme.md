@@ -1,4 +1,7 @@
 # Owen’s Iris layout
 
-To build for Keeb.io Iris Rev 6:  
+To clean and build:  
 `$ qmk compile --clean --keyboard keebio/iris/rev6 --keymap otownend`
+
+To flash:  
+`$ qmk --verbose flash --keyboard keebio/iris/rev6 --keymap otownend`
