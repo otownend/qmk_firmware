@@ -1,6 +1,8 @@
 # Bootloader selection
-BOOTLOADER = atmel-dfu
+#BOOTLOADER = atmel-dfu
 #BOOTLOADER = qmk-dfu
+BOOTLOADER = rp2040
+SERIAL_DRIVER = vendor
 
 # Build Options
 #   change yes to no to disable
