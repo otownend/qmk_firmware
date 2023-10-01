@@ -53,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_MOVE] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
-      KC_ESC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_DEL,
+      KC_ESC, KC_MINS, KC_EQL , KC_LBRC, KC_RBRC, XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_DEL,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      _______, WEB_BK,  KC_PGUP, KC_UP,   KC_PGDN, WEB_L,                              XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
