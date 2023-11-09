@@ -1,8 +1,11 @@
-# Bootloader selection
+## For Iris REV6
 #BOOTLOADER = atmel-dfu
-#BOOTLOADER = qmk-dfu
+
+## For Iris REV8
 BOOTLOADER = rp2040
 SERIAL_DRIVER = vendor
+
+########
 
 # Build Options
 #   change yes to no to disable

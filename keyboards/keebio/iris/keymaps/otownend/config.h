@@ -17,6 +17,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+//#define REV6 1
+
+# ifdef REV6
+
+#define SPLIT_HAND_PIN D5
+#define RGBLIGHT_DEFAULT_VAL 120
+#define RGBLIGHT_DEFAULT_MODE (RGBLIGHT_MODE_RAINBOW_SWIRL + 2)
+
+# else
+
 #define SPLIT_HAND_PIN GP4
 #define USB_VBUS_PIN GP8
 #define SERIAL_USART_FULL_DUPLEX
@@ -28,6 +38,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define I2C_DRIVER I2CD2
 #define I2C1_SDA_PIN GP10
 #define I2C1_SCL_PIN GP11
+
+# endif
 
 // RGB Matrix
 #define RGB_MATRIX_DEFAULT_VAL RGB_MATRIX_MAXIMUM_BRIGHTNESS
