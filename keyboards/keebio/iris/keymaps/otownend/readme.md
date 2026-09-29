@@ -10,6 +10,7 @@ To flash:
 
 ## Rev 6
 Pre-step
+`$ git submodule update --init --recursive lib/lufa`
 Go to config.h and uncomment the define for REV6
 Go to rules.mk and change the booloader to atmel-dfu
 
